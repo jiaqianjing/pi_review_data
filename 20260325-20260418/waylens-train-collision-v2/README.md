@@ -1,14 +1,14 @@
-# Waylens Train Collision Dataset
+# Waylens Train Collision Dataset v2
 
 ## Overview
 
 Incremental training data for collision detection model. Contains samples remaining after eval set extraction.
 
-- **File**: `waylens-train-collision.csv`
+- **File**: `meta.csv`
 - **Total samples**: 311
 - **Positive (Collision Detected)**: 310
 - **Negative (Non-Collision Detected)**: 1
-- **Source**: `reviewed_clips_2026-04-18.csv` — residual after eval set (`waylens-eval-collision-v2.csv`) extraction
+- **Source**: `reviewed_clips_2026-04-18.csv` — residual after eval set (`waylens-eval-collision-v2/meta.csv`) extraction
 - **Note**: This is an incremental supplement to existing training data; the small negative count is expected
 
 ## Video Specification
