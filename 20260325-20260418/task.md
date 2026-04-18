@@ -28,15 +28,19 @@
 2. 正样本：50 个，label 为 collision；
 3. 负样本：5000 个，label 为 no_collision；
 4. 按子标签的比例分层抽取，保证数据多样性，保证数据集涵盖每一个子类；
+5. 将 s3 对应的视频数据通过当前 ec2 机器配置的 IAM Role 下载到本地目录，命名格式：{env}-{clipid}-{sn}.mp4;
 
 # 次要任务 train set 划分
 1. 保证 eval set 划分后的剩余的数据，全部划分给 train set；
+2. 将 s3 对应的视频数据通过当前 ec2 机器配置的 IAM Role 下载到本地目录, 命名格式：{env}-{clipid}-{sn}.mp4;
 
 # 输出文件
-1. eval set 结果存放文件：waylens-eval-collision-v2/meta.csv
-2. eval set 说明文件：waylens-eval-collision-v2/README.md
-3. train set 结果存放文件：waylens-train-collision-v2/meta.csv
-4. train set 说明文件：waylens-train-collision-v2/README.md
+1. eval set meta 结果存放文件：waylens-eval-collision-v2/meta.csv
+2. eval set video 存放目录：waylens-eval-collision-v2/videos/
+3. eval set 说明文件：waylens-eval-collision-v2/README.md
+4. train set 结果存放文件：waylens-train-collision-v2/meta.csv
+5. train set video 存放目录：waylens-train-collision-v2/videos/
+6. train set 说明文件：waylens-train-collision-v2/README.md
 
 
 # 备注
