@@ -4,7 +4,7 @@
 
 Evaluation dataset for collision detection model benchmarking. Extracted from human-reviewed dashcam clips via stratified sampling.
 
-- **File**: `waylens-eval-collision-v2.csv`
+- **File**: `meta.csv`
 - **Total samples**: 5050
 - **Positive (Collision Detected)**: 50
 - **Negative (Non-Collision Detected)**: 5000

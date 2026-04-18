@@ -151,12 +151,16 @@ def main():
 
     # Write CSVs
     out_dir = Path(__file__).parent
-    write_csv(out_dir / "waylens-eval-collision-v2.csv", eval_set, fieldnames)
-    write_csv(out_dir / "waylens-train-collision.csv", train, fieldnames)
+    eval_dir = out_dir / "waylens-eval-collision-v2"
+    train_dir = out_dir / "waylens-train-collision-v2"
+    eval_dir.mkdir(exist_ok=True)
+    train_dir.mkdir(exist_ok=True)
+    write_csv(eval_dir / "meta.csv", eval_set, fieldnames)
+    write_csv(train_dir / "meta.csv", train, fieldnames)
 
     print()
-    print("Written: waylens-eval-collision-v2.csv")
-    print("Written: waylens-train-collision.csv")
+    print("Written: waylens-eval-collision-v2/meta.csv")
+    print("Written: waylens-train-collision-v2/meta.csv")
 
 
 if __name__ == "__main__":

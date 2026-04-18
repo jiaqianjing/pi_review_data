@@ -33,10 +33,10 @@
 1. 保证 eval set 划分后的剩余的数据，全部划分给 train set；
 
 # 输出文件
-1. eval set 结果存放文件：waylens-eval-collision-v2.csv
-2. eval set 说明文件：waylens-eval-collision-v2.md
-3. train set 结果存放文件：waylens-train-collision.csv
-4. train set 说明文件：waylens-train-collision.md
+1. eval set 结果存放文件：waylens-eval-collision-v2/meta.csv
+2. eval set 说明文件：waylens-eval-collision-v2/README.md
+3. train set 结果存放文件：waylens-train-collision-v2/meta.csv
+4. train set 说明文件：waylens-train-collision-v2/README.md
 
 
 # 备注
