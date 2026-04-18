@@ -49,3 +49,10 @@
 2. 优先保证 eval set 的数量和质量，train set 是增量的，后续还有其他样本补充；
 3. 正样本（Collision Detected）按 L2+L3 组合做分层抽样，保证每种碰撞子类型都被覆盖；
 4. 负样本（Non-Collision Detected）按 L2 级别做分层抽样；
+
+# 补充说明（2026-04-19 确认）
+1. 正样本稀少子类（如 Animal Strike Collision=1, Vertical Curb Strike Collision=2）每类至少取 1 条保证覆盖，剩余名额按各子类占比分配；严格保证 eval 正样本 50 个；
+2. 负样本严格保证 eval 5000 个；train set 的负样本仅为增量扩充已有 train set，数量少是预期行为；
+3. 正样本分层逻辑：11 种 L2+L3 子类 → 每类至少 1 个 → 剩余 39 个按占比分配；
+4. 负样本分层逻辑：6 种 L2 类别 → 按占比分配，每类至少 1 个；
+5. 随机种子：使用字符串 "v2" 作为 seed，保证抽样可复现；
