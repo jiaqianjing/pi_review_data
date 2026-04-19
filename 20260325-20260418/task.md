@@ -65,3 +65,4 @@
 # 需求迭代
 ## 20260419
 1. 帮我根据 @waylens-eval-collision-v2/meta.csv 生成一个简短 html 报告，包含数据分布图，以及每个分布对应的具体 1-2 case（仅列出：env,clipid,sn 信息即可）
+2. 帮我根据 @waylens-train-collision-v2/meta.csv 生成一个简短 html 报告，包含数据分布图，以及每个分布对应的具体 1-2 case（仅列出：env,clipid,sn 信息即可）
