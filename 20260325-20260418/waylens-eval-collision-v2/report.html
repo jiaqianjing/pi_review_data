@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Eval Set Report - waylens-eval-collision-v2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{font-family:system-ui,sans-serif;max-width:960px;margin:40px auto;padding:0 20px;color:#333}
+h1{border-bottom:2px solid #2196F3;padding-bottom:8px}
+h2{color:#1976D2;margin-top:32px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #ddd;padding:6px 10px;text-align:left;font-size:13px}
+th{background:#f5f5f5}
+tr:nth-child(even){background:#fafafa}
+canvas{max-width:100%;margin:12px 0}
+</style></head><body>
+<h1>📊 waylens-eval-collision-v2 Report</h1>
+<p>Generated from <code>waylens-eval-collision-v2/meta.csv</code></p>
+
+<h2>Overview</h2>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Total Samples</td><td>5050</td></tr>
+<tr><td>Positive (Collision)</td><td>50</td></tr>
+<tr><td>Negative (Non-Collision)</td><td>5000</td></tr></table>
+
+<h2>Label L1 Distribution</h2>
+<canvas id="Label_L1_Distribution" height="120"></canvas>
+<script>
+new Chart(document.getElementById('Label_L1_Distribution'),{
+  type:'bar',
+  data:{labels:["Non-Collision Detected", "Collision Detected"],datasets:[{label:'Count',data:[5000, 50],backgroundColor:'rgba(54,162,235,0.6)'}]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+});
+</script>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">Non-Collision Detected</td><td rowspan="2">5000</td><td>api</td><td>1188129379004350464</td><td>6B3054CT</td></tr>
+<tr><td>api</td><td>1192485261473382400</td><td>6B300F7M</td></tr>
+<tr><td rowspan="2">Collision Detected</td><td rowspan="2">50</td><td>api</td><td>1037110736737959936</td><td>8B50430F</td></tr>
+<tr><td>api</td><td>1030553406802132992</td><td>8B5069RY</td></tr>
+</table>
+
+<h2>Positive: L2 + L3 Sub-types</h2>
+<canvas id="Positive:_L2_+_L3_Sub-types" height="120"></canvas>
+<script>
+new Chart(document.getElementById('Positive:_L2_+_L3_Sub-types'),{
+  type:'bar',
+  data:{labels:["Collision - Accident / Other Collision Accident", "Collision - Accident / Rear-End Collision", "Collision - Accident / Side-Impact Collision", "Collision - Non-Accident / Other Non-Accident Scenario", "Collision - Non-Accident / Non-Accident Reverse (Docking/Coupling)", "Collision - Accident / Severe Road Surface Variation", "Collision - Accident / Head-On Collision", "Collision - Accident / Vehicle Rollover", "Collision - Non-Accident / Operational Collision (Snow Plowing/Earthwork)", "Collision - Accident / Animal Strike Collision", "Collision - Accident / Vertical Curb Strike Collision"],datasets:[{label:'Count',data:[14, 9, 6, 4, 4, 4, 3, 2, 2, 1, 1],backgroundColor:'rgba(54,162,235,0.6)'}]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+});
+</script>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">Collision - Accident / Other Collision Accident</td><td rowspan="2">14</td><td>api</td><td>1043943073396195328</td><td>8B50658S</td></tr>
+<tr><td>api</td><td>1028014681597575168</td><td>8B5033X5</td></tr>
+<tr><td rowspan="2">Collision - Accident / Rear-End Collision</td><td rowspan="2">9</td><td>api</td><td>1081198492527001600</td><td>8B505127</td></tr>
+<tr><td>api</td><td>1023965333695922176</td><td>8B5003DM</td></tr>
+<tr><td rowspan="2">Collision - Accident / Side-Impact Collision</td><td rowspan="2">6</td><td>api</td><td>1196918630454034432</td><td>8B5053QP</td></tr>
+<tr><td>api</td><td>1011613103730868224</td><td>8B50830J</td></tr>
+<tr><td rowspan="2">Collision - Non-Accident / Other Non-Accident Scenario</td><td rowspan="2">4</td><td>api</td><td>1189294874025951232</td><td>8B4001WL</td></tr>
+<tr><td>gpst</td><td>1199668514743525376</td><td>6B301E23</td></tr>
+<tr><td rowspan="2">Collision - Non-Accident / Non-Accident Reverse (Docking/Coupling)</td><td rowspan="2">4</td><td>api</td><td>1188479841754841088</td><td>8B513175</td></tr>
+<tr><td>gpst</td><td>1198669619284549632</td><td>8D30322S</td></tr>
+<tr><td rowspan="2">Collision - Accident / Severe Road Surface Variation</td><td rowspan="2">4</td><td>api</td><td>1038933136307814400</td><td>8B5053C7</td></tr>
+<tr><td>api</td><td>1037110736737959936</td><td>8B50430F</td></tr>
+<tr><td rowspan="2">Collision - Accident / Head-On Collision</td><td rowspan="2">3</td><td>api</td><td>1190070505533767680</td><td>8B5065EE</td></tr>
+<tr><td>api</td><td>1063420312785420288</td><td>6B3079DB</td></tr>
+<tr><td rowspan="2">Collision - Accident / Vehicle Rollover</td><td rowspan="2">2</td><td>api</td><td>1003978441990758400</td><td>8B50520A</td></tr>
+<tr><td>api</td><td>1003272161328267264</td><td>8B500397</td></tr>
+<tr><td rowspan="2">Collision - Non-Accident / Operational Collision (Snow Plowing/Earthwork)</td><td rowspan="2">2</td><td>gpst</td><td>1202722783939928064</td><td>8B40023G</td></tr>
+<tr><td>gpst</td><td>1196778133320245248</td><td>8B5121K7</td></tr>
+<tr><td rowspan="1">Collision - Accident / Animal Strike Collision</td><td rowspan="1">1</td><td>api</td><td>903183770025336832</td><td>6B2BN9GS</td></tr>
+<tr><td rowspan="1">Collision - Accident / Vertical Curb Strike Collision</td><td rowspan="1">1</td><td>api</td><td>1041821102541799424</td><td>8B50288H</td></tr>
+</table>
+
+<h2>Negative: L2 Sub-types</h2>
+<canvas id="Negative:_L2_Sub-types" height="120"></canvas>
+<script>
+new Chart(document.getElementById('Negative:_L2_Sub-types'),{
+  type:'bar',
+  data:{labels:["Turning Segment", "No Anomaly", "Rough Road Segment", "Dirty Data", "Near Miss", "Severe Lighting Variation"],datasets:[{label:'Count',data:[1871, 1736, 753, 430, 126, 84],backgroundColor:'rgba(54,162,235,0.6)'}]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+});
+</script>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">Turning Segment</td><td rowspan="2">1871</td><td>api</td><td>1188907539732004864</td><td>6B3079SK</td></tr>
+<tr><td>api</td><td>1190039690699505664</td><td>8B51311K</td></tr>
+<tr><td rowspan="2">No Anomaly</td><td rowspan="2">1736</td><td>api</td><td>1198616377485852672</td><td>8B513142</td></tr>
+<tr><td>api</td><td>1189396807596277760</td><td>8B3001CY</td></tr>
+<tr><td rowspan="2">Rough Road Segment</td><td rowspan="2">753</td><td>api</td><td>1198691784893562880</td><td>6B300JU2</td></tr>
+<tr><td>api</td><td>1189636520089387008</td><td>6B306QDP</td></tr>
+<tr><td rowspan="2">Dirty Data</td><td rowspan="2">430</td><td>gpst</td><td>1198557160536154112</td><td>6B301GLY</td></tr>
+<tr><td>gpst</td><td>1203618676402692096</td><td>6B3111DS</td></tr>
+<tr><td rowspan="2">Near Miss</td><td rowspan="2">126</td><td>api</td><td>1190660163741319168</td><td>8B506716</td></tr>
+<tr><td>api</td><td>1009806116873461760</td><td>8B5034WH</td></tr>
+<tr><td rowspan="2">Severe Lighting Variation</td><td rowspan="2">84</td><td>gpst</td><td>1199448070430007296</td><td>8E50315Q</td></tr>
+<tr><td>api</td><td>1191670030589394944</td><td>8B5003F7</td></tr>
+</table>
+
+<h2>Env Distribution</h2>
+<canvas id="Env_Distribution" height="120"></canvas>
+<script>
+new Chart(document.getElementById('Env_Distribution'),{
+  type:'bar',
+  data:{labels:["api", "gpst"],datasets:[{label:'Count',data:[4024, 1026],backgroundColor:'rgba(54,162,235,0.6)'}]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+});
+</script>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">api</td><td rowspan="2">4024</td><td>api</td><td>1189599605608841216</td><td>8B50037W</td></tr>
+<tr><td>api</td><td>1191103598872920064</td><td>8B5041GY</td></tr>
+<tr><td rowspan="2">gpst</td><td rowspan="2">1026</td><td>gpst</td><td>1198660602369810432</td><td>6B301K48</td></tr>
+<tr><td>gpst</td><td>1198630695992434688</td><td>8B5121R0</td></tr>
+</table>
+
+</body></html>
