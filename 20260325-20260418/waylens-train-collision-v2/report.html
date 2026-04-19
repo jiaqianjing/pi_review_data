@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>waylens-train-collision-v2 Report</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:960px;margin:40px auto;padding:0 20px;color:#333}
+h1{border-bottom:2px solid #2196F3;padding-bottom:8px}
+h2{color:#1976D2;margin-top:32px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #ddd;padding:6px 10px;text-align:left;font-size:13px}
+th{background:#f5f5f5}
+tr:nth-child(even){background:#fafafa}
+</style></head><body>
+<h1>📊 waylens-train-collision-v2 Report</h1>
+<p>Generated from <code>waylens-train-collision-v2/meta.csv</code></p>
+<h2>Overview</h2>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Total</td><td>311</td></tr>
+<tr><td>Positive (Collision)</td><td>310</td></tr>
+<tr><td>Negative (Non-Collision)</td><td>1</td></tr></table>
+<h2>Label L1 Distribution</h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="88" style="font-family:system-ui,sans-serif;font-size:12px">
+<text x="272" y="29.599999999999998" text-anchor="end" fill="#333">Collision Detected</text>
+<rect x="280" y="10" width="460" height="28" rx="3" fill="#4285F4" opacity="0.8"/>
+<text x="746" y="29.599999999999998" fill="#555">310</text>
+<text x="272" y="63.599999999999994" text-anchor="end" fill="#333">Non-Collision Detected</text>
+<rect x="280" y="44" width="2" height="28" rx="3" fill="#EA4335" opacity="0.8"/>
+<text x="288" y="63.599999999999994" fill="#555">1</text>
+</svg>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">Collision Detected</td><td rowspan="2">310</td><td>api</td><td>1041053927191248896</td><td>8B5025MT</td></tr>
+<tr><td>api</td><td>1034856710130532352</td><td>8B4015C6</td></tr>
+<tr><td rowspan="1">Non-Collision Detected</td><td rowspan="1">1</td><td>api</td><td>1189641696766492672</td><td>8B5003CG</td></tr>
+</table>
+<h2>Positive: L2 + L3 Sub-types</h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="360" style="font-family:system-ui,sans-serif;font-size:12px">
+<text x="272" y="29.599999999999998" text-anchor="end" fill="#333">Collision - Accident / Other Collision Accident</text>
+<rect x="280" y="10" width="460" height="28" rx="3" fill="#4285F4" opacity="0.8"/>
+<text x="746" y="29.599999999999998" fill="#555">107</text>
+<text x="272" y="63.599999999999994" text-anchor="end" fill="#333">Collision - Accident / Rear-End Collision</text>
+<rect x="280" y="44" width="270" height="28" rx="3" fill="#EA4335" opacity="0.8"/>
+<text x="556" y="63.599999999999994" fill="#555">63</text>
+<text x="272" y="97.6" text-anchor="end" fill="#333">Collision - Accident / Side-Impact Collision</text>
+<rect x="280" y="78" width="171" height="28" rx="3" fill="#FBBC04" opacity="0.8"/>
+<text x="457" y="97.6" fill="#555">40</text>
+<text x="272" y="131.6" text-anchor="end" fill="#333">Collision - Non-Accident / Non-Accident Reverse (Docking/Coupling)</text>
+<rect x="280" y="112" width="107" height="28" rx="3" fill="#34A853" opacity="0.8"/>
+<text x="393" y="131.6" fill="#555">25</text>
+<text x="272" y="165.6" text-anchor="end" fill="#333">Collision - Accident / Severe Road Surface Variation</text>
+<rect x="280" y="146" width="94" height="28" rx="3" fill="#FF6D01" opacity="0.8"/>
+<text x="380" y="165.6" fill="#555">22</text>
+<text x="272" y="199.6" text-anchor="end" fill="#333">Collision - Non-Accident / Other Non-Accident Scenario</text>
+<rect x="280" y="180" width="90" height="28" rx="3" fill="#46BDC6" opacity="0.8"/>
+<text x="376" y="199.6" fill="#555">21</text>
+<text x="272" y="233.6" text-anchor="end" fill="#333">Collision - Accident / Head-On Collision</text>
+<rect x="280" y="214" width="68" height="28" rx="3" fill="#7B61FF" opacity="0.8"/>
+<text x="354" y="233.6" fill="#555">16</text>
+<text x="272" y="267.6" text-anchor="end" fill="#333">Collision - Accident / Vehicle Rollover</text>
+<rect x="280" y="248" width="34" height="28" rx="3" fill="#F538A0" opacity="0.8"/>
+<text x="320" y="267.6" fill="#555">8</text>
+<text x="272" y="301.6" text-anchor="end" fill="#333">Collision - Non-Accident / Operational Collision (Snow Plowing/Earthwork)</text>
+<rect x="280" y="282" width="30" height="28" rx="3" fill="#00ACC1" opacity="0.8"/>
+<text x="316" y="301.6" fill="#555">7</text>
+<text x="272" y="335.6" text-anchor="end" fill="#333">Collision - Accident / Vertical Curb Strike Collision</text>
+<rect x="280" y="316" width="4" height="28" rx="3" fill="#8D6E63" opacity="0.8"/>
+<text x="290" y="335.6" fill="#555">1</text>
+</svg>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">Collision - Accident / Other Collision Accident</td><td rowspan="2">107</td><td>api</td><td>1058135259260026880</td><td>8B50433G</td></tr>
+<tr><td>api</td><td>1001559000946475008</td><td>8B300192</td></tr>
+<tr><td rowspan="2">Collision - Accident / Rear-End Collision</td><td rowspan="2">63</td><td>api</td><td>1057674574768013312</td><td>8B5043Z2</td></tr>
+<tr><td>api</td><td>1026119966077911040</td><td>8B50416K</td></tr>
+<tr><td rowspan="2">Collision - Accident / Side-Impact Collision</td><td rowspan="2">40</td><td>api</td><td>1006980369767088128</td><td>8B50211J</td></tr>
+<tr><td>api</td><td>1037535952538599424</td><td>8B40132N</td></tr>
+<tr><td rowspan="2">Collision - Non-Accident / Non-Accident Reverse (Docking/Coupling)</td><td rowspan="2">25</td><td>gpst</td><td>1198642709909348352</td><td>6B301G58</td></tr>
+<tr><td>api</td><td>1189705739388747776</td><td>8B5041JE</td></tr>
+<tr><td rowspan="2">Collision - Accident / Severe Road Surface Variation</td><td rowspan="2">22</td><td>api</td><td>1199057410275311616</td><td>8B5028F3</td></tr>
+<tr><td>api</td><td>1026587484643033088</td><td>8B50810V</td></tr>
+<tr><td rowspan="2">Collision - Non-Accident / Other Non-Accident Scenario</td><td rowspan="2">21</td><td>gpst</td><td>1197323820780888064</td><td>6B3014MP</td></tr>
+<tr><td>api</td><td>1189024709262606336</td><td>8B5041Q7</td></tr>
+<tr><td rowspan="2">Collision - Accident / Head-On Collision</td><td rowspan="2">16</td><td>api</td><td>1029401071673573376</td><td>8B5082XY</td></tr>
+<tr><td>api</td><td>1027058135883481088</td><td>8B5002AV</td></tr>
+<tr><td rowspan="2">Collision - Accident / Vehicle Rollover</td><td rowspan="2">8</td><td>api</td><td>1034204034879356928</td><td>8B50645U</td></tr>
+<tr><td>api</td><td>1188924579083616256</td><td>8B5062E8</td></tr>
+<tr><td rowspan="2">Collision - Non-Accident / Operational Collision (Snow Plowing/Earthwork)</td><td rowspan="2">7</td><td>api</td><td>1198745577328902144</td><td>8B5041LK</td></tr>
+<tr><td>gpst</td><td>1201898004492197889</td><td>8B5122PF</td></tr>
+<tr><td rowspan="1">Collision - Accident / Vertical Curb Strike Collision</td><td rowspan="1">1</td><td>api</td><td>1041829473764409344</td><td>8B5066L8</td></tr>
+</table>
+<h2>Negative: L2 Sub-types</h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="54" style="font-family:system-ui,sans-serif;font-size:12px">
+<text x="272" y="29.599999999999998" text-anchor="end" fill="#333">Turning Segment</text>
+<rect x="280" y="10" width="460" height="28" rx="3" fill="#4285F4" opacity="0.8"/>
+<text x="746" y="29.599999999999998" fill="#555">1</text>
+</svg>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="1">Turning Segment</td><td rowspan="1">1</td><td>api</td><td>1189641696766492672</td><td>8B5003CG</td></tr>
+</table>
+<h2>Env Distribution</h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="88" style="font-family:system-ui,sans-serif;font-size:12px">
+<text x="272" y="29.599999999999998" text-anchor="end" fill="#333">api</text>
+<rect x="280" y="10" width="460" height="28" rx="3" fill="#4285F4" opacity="0.8"/>
+<text x="746" y="29.599999999999998" fill="#555">271</text>
+<text x="272" y="63.599999999999994" text-anchor="end" fill="#333">gpst</text>
+<rect x="280" y="44" width="67" height="28" rx="3" fill="#EA4335" opacity="0.8"/>
+<text x="353" y="63.599999999999994" fill="#555">40</text>
+</svg>
+<table>
+<tr><th>Category</th><th>Count</th><th>Env</th><th>Clip ID</th><th>Camera SN</th></tr>
+<tr><td rowspan="2">api</td><td rowspan="2">271</td><td>api</td><td>1036302569787523072</td><td>8B50834L</td></tr>
+<tr><td>api</td><td>1035534421215838208</td><td>8B50215T</td></tr>
+<tr><td rowspan="2">gpst</td><td rowspan="2">40</td><td>gpst</td><td>1199400649914195968</td><td>8B5141XU</td></tr>
+<tr><td>gpst</td><td>1204729558360793088</td><td>8B5142PM</td></tr>
+</table>
+
+</body></html>
