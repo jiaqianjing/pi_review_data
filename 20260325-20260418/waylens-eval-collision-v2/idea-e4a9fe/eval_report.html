@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>idea-e4a9fe Eval Report</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg:#f4f6fb; --panel:#ffffff; --text:#162033;
+  --muted:#5d6a82; --grid:#d8e0ef; --accent:#0f5bd8;
+  --success:#138f63; --warning:#b66a12; --danger:#c23934;
+  --purple:#6c4de6; --shadow:0 18px 50px rgba(20, 37, 63, 0.10);
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--text); font-family:"IBM Plex Sans","Avenir Next","Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at top left,#d9e8ff 0,rgba(217,232,255,.4) 18%,transparent 42%),
+    radial-gradient(circle at top right,#fff0d8 0,rgba(255,240,216,.5) 20%,transparent 44%),
+    linear-gradient(180deg,#f9fbff 0%,var(--bg) 100%);
+}
+code { font-family:"SFMono-Regular","Menlo","Consolas",monospace; }
+.page { width:min(1220px,calc(100vw - 32px)); margin:24px auto 64px; }
+.hero {
+  position:relative; overflow:hidden; color:#fff; border-radius:28px; box-shadow:var(--shadow);
+  padding:32px; background:linear-gradient(135deg,#0e2248 0%,#16356f 56%,#0f5bd8 100%);
+}
+.hero::after {
+  content:""; position:absolute; inset:auto -80px -80px auto; width:260px; height:260px;
+  background:radial-gradient(circle,rgba(255,255,255,.24) 0,rgba(255,255,255,.03) 60%,transparent 72%);
+}
+.eyebrow {
+  display:inline-flex; gap:10px; align-items:center; margin-bottom:18px; padding:8px 14px;
+  border-radius:999px; background:rgba(255,255,255,.12); font-size:13px; letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.hero h1 { margin:0 0 10px; font-size:clamp(30px,4vw,46px); line-height:1.02; }
+.hero p { max-width:920px; margin:0; color:rgba(255,255,255,.88); font-size:15px; line-height:1.6; }
+.hero-meta {
+  display:flex; flex-wrap:wrap; gap:12px 18px; margin-top:18px; color:rgba(255,255,255,.84); font-size:14px;
+}
+.status-pill {
+  display:inline-flex; align-items:center; padding:7px 12px; border-radius:999px; font-weight:700;
+  background:rgba(19,143,99,.18); border:1px solid rgba(255,255,255,.18);
+}
+.section {
+  margin-top:26px; padding:26px; background:var(--panel); border-radius:24px; box-shadow:var(--shadow);
+}
+.section-title { display:flex; flex-direction:column; gap:6px; margin-bottom:18px; }
+.section-title h2 { margin:0; font-size:24px; }
+.section-subtitle { margin:0; color:var(--muted); line-height:1.55; }
+.metrics-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; }
+.metric-card {
+  min-height:120px; padding:18px 18px 16px; border-radius:18px; border:1px solid transparent;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.card-default { background:#f7f9fd; border-color:#ebeff7; }
+.card-accent { background:#dbe8ff; border-color:#bfd4ff; }
+.card-success { background:#d8f3e9; border-color:#bde9d8; }
+.card-warning { background:#fce9cf; border-color:#f5d9b0; }
+.card-danger { background:#fde4e2; border-color:#f5c4bf; }
+.card-purple { background:#ece7ff; border-color:#d6cbff; }
+.card-label {
+  color:var(--muted); font-size:13px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  display:flex; align-items:center; gap:5px;
+}
+.tip {
+  position:relative; display:inline-flex; align-items:center; justify-content:center;
+  width:16px; height:16px; border-radius:50%; background:#c8d1e2; color:#fff;
+  font-size:11px; font-weight:800; cursor:help; flex-shrink:0; line-height:1;
+}
+.tip:hover::after {
+  content:attr(data-tip); position:absolute; left:50%; bottom:calc(100% + 8px);
+  transform:translateX(-50%); width:max-content; max-width:280px; padding:8px 12px;
+  border-radius:10px; background:#1a2744; color:#e7edf7; font-size:12px; font-weight:400;
+  line-height:1.5; letter-spacing:normal; text-transform:none; white-space:normal;
+  z-index:999; pointer-events:none; box-shadow:0 4px 16px rgba(0,0,0,.18);
+}
+.tip-left:hover::after { left:auto; right:0; transform:none; }
+.card-value { margin-top:10px; font-size:clamp(24px,4vw,34px); line-height:1.02; font-weight:800; }
+.card-subtitle { margin-top:10px; color:var(--muted); font-size:13px; line-height:1.45; }
+.two-col { display:grid; grid-template-columns:1.15fr .85fr; gap:18px; align-items:start; }
+.subpanel {
+  padding:18px; border:1px solid #e4ebf7; border-radius:18px; background:#f8fbff;
+}
+.subpanel h3 { margin:0 0 12px; font-size:18px; }
+.subpanel p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+.chart-stack { display:grid; gap:18px; }
+.chart-card {
+  padding:16px; border:1px solid #e4ebf7; border-radius:18px; background:#fbfcff; overflow-x:auto;
+}
+.data-table {
+  width:100%; border-collapse:collapse; border-radius:16px; font-size:14px;
+}
+.data-table thead th {
+  padding:12px 14px; background:#eff4fd; color:#29406a; text-align:left; font-size:12px;
+  letter-spacing:.05em; text-transform:uppercase; position:relative;
+}
+.data-table thead th:first-child { border-radius:16px 0 0 0; }
+.data-table thead th:last-child { border-radius:0 16px 0 0; }
+.data-table thead th .tip { background:#a8b4cc; }
+.data-table tbody td { padding:12px 14px; border-top:1px solid #ebeff7; vertical-align:top; }
+.data-table tbody tr:nth-child(even) { background:#fbfcff; }
+.compact-table tbody td { font-variant-numeric:tabular-nums; }
+.insight-list { margin:0; padding-left:20px; display:grid; gap:10px; line-height:1.6; }
+.confusion-wrap { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; }
+.confusion-shell { position:relative; padding:28px 0 0 88px; }
+.axis-label {
+  position:absolute; color:var(--muted); font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+}
+.axis-top { top:0; left:116px; }
+.axis-top-right { left:calc(50% + 70px); }
+.axis-left { left:0; top:110px; transform:rotate(-90deg); transform-origin:left top; }
+.axis-left-bottom { top:286px; }
+.matrix-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.matrix-cell { min-height:156px; padding:20px; border-radius:20px; border:1px solid transparent; }
+.matrix-tp { background:#d8f3e9; border-color:#bae8d6; }
+.matrix-fn { background:#fce9cf; border-color:#f0cf9f; }
+.matrix-fp { background:#fde4e2; border-color:#f2c0bc; }
+.matrix-tn { background:#edf5ff; border-color:#cfe0fb; }
+.matrix-name {
+  color:var(--muted); font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+}
+.matrix-value { margin-top:12px; font-size:clamp(30px,4vw,42px); line-height:1; font-weight:900; }
+.matrix-sub { margin-top:12px; color:var(--muted); font-size:14px; }
+.stats-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.stat-chip { padding:16px; border:1px solid #ebeff7; border-radius:16px; background:#f7f9fd; }
+.stat-chip .label {
+  color:var(--muted); font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  display:flex; align-items:center; gap:5px;
+}
+.stat-chip .value { margin-top:10px; font-size:24px; font-weight:800; }
+svg { width:100%; height:auto; display:block; }
+.raw-json {
+  margin:0; padding:18px; border-radius:18px; overflow-x:auto; background:#101726;
+  color:#e7edf7; font-size:13px; line-height:1.5;
+}
+.footer-note { margin-top:16px; color:var(--muted); font-size:13px; line-height:1.6; }
+@media (max-width:980px) {
+  .two-col,.confusion-wrap { grid-template-columns:1fr; }
+  .confusion-shell { padding:36px 0 0; }
+  .axis-label { position:static; transform:none; display:inline-block; margin:0 14px 8px 0; }
+}
+@media (max-width:720px) {
+  .page { width:min(1220px,calc(100vw - 16px)); margin:8px auto 32px; }
+  .hero,.section { padding:18px; border-radius:20px; }
+  .metrics-grid,.stats-grid { grid-template-columns:1fr; }
+  .data-table { font-size:13px; }
+  .data-table thead th,.data-table tbody td { padding:10px; }
+}
+</style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">Waylens Collision Eval</div>
+      <h1>idea-e4a9fe HTML 可视化报告</h1>
+      <p>该页面基于 <code>/Users/kenjia/workspace/dataset/collision_data/pi_review_data/20260325-20260418/waylens-eval-collision-v2/idea-e4a9fe/eval_report.json</code> 自动生成，汇总了核心指标、阈值扫描、混淆矩阵和 L2 类别分布，便于直接浏览当前评估结果。</p>
+      <div class="hero-meta">
+        <span class="status-pill">COMPLETED</span>
+        <span>Eval Version: <strong>v2</strong></span>
+        <span>Output: <strong>eval_report.html</strong></span>
+        <span>Generated: <strong>2026-04-21 14:02:32 CST</strong></span>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="section-title"><h2>Overview</h2><p class="section-subtitle">从整体指标、阈值和样本分布先看当前模型的工作点。</p></div>
+      <div class="metrics-grid"><section class="metric-card card-accent"><div class="card-label">AUC <span class="tip" data-tip="Area Under ROC Curve，衡量模型在所有阈值下区分正负样本的综合能力。值越接近 1 越好。用于比较不同模型的整体判别力，不受阈值选择影响。">?</span></div><div class="card-value">0.9631</div></section><section class="metric-card card-warning"><div class="card-label">F1 <span class="tip" data-tip="F1 = 2 × Precision × Recall / (Precision + Recall)，是精确率和召回率的调和平均。适合在正负样本不均衡时综合评估模型表现。">?</span></div><div class="card-value">0.7126</div></section><section class="metric-card card-success"><div class="card-label">Precision <span class="tip" data-tip="Precision = TP / (TP + FP)，模型预测为正的样本中实际为正的比例。关注误报成本时优先看此指标。">?</span></div><div class="card-value">0.8378</div></section><section class="metric-card card-danger"><div class="card-label">Recall <span class="tip" data-tip="Recall = TP / (TP + FN)，实际正样本中被模型正确识别的比例。关注漏检成本时优先看此指标。">?</span></div><div class="card-value">0.6200</div></section><section class="metric-card card-purple"><div class="card-label">Threshold <span class="tip" data-tip="当前使用的分类阈值，模型输出概率 ≥ 该值时判为正类。阈值越高 Precision 越高但 Recall 越低。">?</span></div><div class="card-value">0.95</div><div class="card-subtitle">from val 0.45</div></section><section class="metric-card card-purple"><div class="card-label">Positive Ratio <span class="tip" data-tip="正样本占总样本的比例 = n_positive / n_total。反映评估集的类别不均衡程度。">?</span></div><div class="card-value">0.99%</div><div class="card-subtitle">50 / 5050</div></section><section class="metric-card card-default"><div class="card-label">Predicted Positive <span class="tip" data-tip="模型预测为正类的样本总数 = TP + FP。">?</span></div><div class="card-value">37</div><div class="card-subtitle">TP 31 + FP 6</div></section><section class="metric-card card-default"><div class="card-label">Predicted Negative <span class="tip" data-tip="模型预测为负类的样本总数 = TN + FN。">?</span></div><div class="card-value">5013</div><div class="card-subtitle">TN 4994 + FN 19</div></section></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Threshold Sweep</h2><p class="section-subtitle">F1 / Precision / Recall 随阈值变化的轨迹，以及当前阈值与验证集阈值的对比。</p></div>
+      <div class="two-col">
+        <div class="chart-card">
+<svg viewBox="0 0 960 370" role="img" aria-label="Threshold sweep chart">
+  <rect x="0" y="0" width="960" height="370" rx="22" fill="#fff"/>
+  <line x1="64" y1="304.00" x2="940" y2="304.00" stroke="#d8e0ef" stroke-width="1"/><text x="54" y="308.00" text-anchor="end" fill="#5d6a82" font-size="12">0.00</text><line x1="64" y1="234.00" x2="940" y2="234.00" stroke="#d8e0ef" stroke-width="1"/><text x="54" y="238.00" text-anchor="end" fill="#5d6a82" font-size="12">0.25</text><line x1="64" y1="164.00" x2="940" y2="164.00" stroke="#d8e0ef" stroke-width="1"/><text x="54" y="168.00" text-anchor="end" fill="#5d6a82" font-size="12">0.50</text><line x1="64" y1="94.00" x2="940" y2="94.00" stroke="#d8e0ef" stroke-width="1"/><text x="54" y="98.00" text-anchor="end" fill="#5d6a82" font-size="12">0.75</text><line x1="64" y1="24.00" x2="940" y2="24.00" stroke="#d8e0ef" stroke-width="1"/><text x="54" y="28.00" text-anchor="end" fill="#5d6a82" font-size="12">1.00</text><line x1="64.00" y1="24" x2="64.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="64.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.05</text><line x1="112.67" y1="24" x2="112.67" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="112.67" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.10</text><line x1="161.33" y1="24" x2="161.33" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="161.33" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.15</text><line x1="210.00" y1="24" x2="210.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="210.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.20</text><line x1="258.67" y1="24" x2="258.67" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="258.67" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.25</text><line x1="307.33" y1="24" x2="307.33" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="307.33" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.30</text><line x1="356.00" y1="24" x2="356.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="356.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.35</text><line x1="404.67" y1="24" x2="404.67" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="404.67" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.40</text><line x1="453.33" y1="24" x2="453.33" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="453.33" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.45</text><line x1="502.00" y1="24" x2="502.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="502.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.50</text><line x1="550.67" y1="24" x2="550.67" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="550.67" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.55</text><line x1="599.33" y1="24" x2="599.33" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="599.33" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.60</text><line x1="648.00" y1="24" x2="648.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="648.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.65</text><line x1="696.67" y1="24" x2="696.67" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="696.67" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.70</text><line x1="745.33" y1="24" x2="745.33" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="745.33" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.75</text><line x1="794.00" y1="24" x2="794.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="794.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.80</text><line x1="842.67" y1="24" x2="842.67" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="842.67" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.85</text><line x1="891.33" y1="24" x2="891.33" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="891.33" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.90</text><line x1="940.00" y1="24" x2="940.00" y2="304" stroke="#d8e0ef" stroke-width=".6" opacity=".55"/><text x="940.00" y="338" text-anchor="middle" fill="#5d6a82" font-size="11">0.95</text>
+  <rect x="64" y="24" width="876" height="280" rx="12" fill="none" stroke="#d8e0ef" stroke-width="1.2"/>
+  <polyline fill="none" stroke="#b66a12" stroke-width="3" points="64.00,267.04 112.67,252.68 161.33,242.88 210.00,235.43 258.67,228.23 307.33,220.20 356.00,213.31 404.67,203.09 453.33,196.82 502.00,190.29 550.67,186.57 599.33,180.60 648.00,173.21 696.67,162.18 745.33,152.32 794.00,141.54 842.67,143.34 891.33,130.90 940.00,104.47"/>
+  <polyline fill="none" stroke="#0f5bd8" stroke-width="3" points="64.00,284.12 112.67,275.50 161.33,269.00 210.00,263.88 258.67,258.61 307.33,252.76 356.00,247.16 404.67,238.87 453.33,233.55 502.00,227.81 550.67,223.70 599.33,218.01 648.00,210.68 696.67,199.00 745.33,187.83 794.00,172.65 842.67,167.89 891.33,145.32 940.00,69.42"/>
+  <polyline fill="none" stroke="#138f63" stroke-width="3" points="64.00,40.80 112.67,46.40 161.33,63.20 210.00,68.80 258.67,74.40 307.33,74.40 356.00,80.00 404.67,80.00 453.33,80.00 502.00,80.00 550.67,85.60 599.33,85.60 648.00,85.60 696.67,85.60 745.33,85.60 794.00,91.20 842.67,108.00 891.33,113.60 940.00,130.40"/>
+  <circle cx="64.00" cy="267.04" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="112.67" cy="252.68" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="161.33" cy="242.88" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="210.00" cy="235.43" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="258.67" cy="228.23" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="307.33" cy="220.20" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="356.00" cy="213.31" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="404.67" cy="203.09" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="453.33" cy="196.82" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="502.00" cy="190.29" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="550.67" cy="186.57" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="599.33" cy="180.60" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="648.00" cy="173.21" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="696.67" cy="162.18" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="745.33" cy="152.32" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="794.00" cy="141.54" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="842.67" cy="143.34" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="891.33" cy="130.90" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/><circle cx="940.00" cy="104.47" r="3.5" fill="#b66a12" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="64.00" cy="284.12" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="112.67" cy="275.50" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="161.33" cy="269.00" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="210.00" cy="263.88" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="258.67" cy="258.61" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="307.33" cy="252.76" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="356.00" cy="247.16" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="404.67" cy="238.87" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="453.33" cy="233.55" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="502.00" cy="227.81" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="550.67" cy="223.70" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="599.33" cy="218.01" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="648.00" cy="210.68" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="696.67" cy="199.00" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="745.33" cy="187.83" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="794.00" cy="172.65" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="842.67" cy="167.89" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="891.33" cy="145.32" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/><circle cx="940.00" cy="69.42" r="3.5" fill="#0f5bd8" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="64.00" cy="40.80" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="112.67" cy="46.40" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="161.33" cy="63.20" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="210.00" cy="68.80" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="258.67" cy="74.40" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="307.33" cy="74.40" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="356.00" cy="80.00" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="404.67" cy="80.00" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="453.33" cy="80.00" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="502.00" cy="80.00" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="550.67" cy="85.60" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="599.33" cy="85.60" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="648.00" cy="85.60" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="696.67" cy="85.60" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="745.33" cy="85.60" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="794.00" cy="91.20" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="842.67" cy="108.00" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="891.33" cy="113.60" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/><circle cx="940.00" cy="130.40" r="3.5" fill="#138f63" stroke="#fff" stroke-width="1.5"/>
+  <line x1="453.33" y1="24" x2="453.33" y2="304" stroke="#6c4de6" stroke-width="1.5" stroke-dasharray="6 4"/><text x="459.33" y="40" fill="#6c4de6" font-size="12" font-weight="600">Threshold From Val</text>
+  <line x1="940.00" y1="24" x2="940.00" y2="304" stroke="#c23934" stroke-width="1.5" stroke-dasharray="6 4"/><text x="934.00" y="40" text-anchor="end" fill="#c23934" font-size="12" font-weight="600">Current Threshold</text>
+  <rect x="64" y="344" width="12" height="12" rx="2" fill="#b66a12"/><text x="82" y="354" fill="#5d6a82" font-size="12">F1</text><rect x="174" y="344" width="12" height="12" rx="2" fill="#0f5bd8"/><text x="192" y="354" fill="#5d6a82" font-size="12">Precision</text><rect x="284" y="344" width="12" height="12" rx="2" fill="#138f63"/><text x="302" y="354" fill="#5d6a82" font-size="12">Recall</text>
+</svg>
+</div>
+        <div class="subpanel">
+          <h3>Threshold Comparison</h3>
+          <table class="data-table compact-table"><thead><tr><th>Point</th><th>Threshold</th><th>F1</th><th>Precision</th><th>Recall</th></tr></thead><tbody><tr><td>Current</td><td>0.95</td><td>0.7126</td><td>0.8378</td><td>0.6200</td></tr><tr><td>From Val</td><td>0.45</td><td>0.3828</td><td>0.2516</td><td>0.8000</td></tr><tr><td>Best Sweep</td><td>0.95</td><td>0.7126</td><td>0.8378</td><td>0.6200</td></tr></tbody></table>
+          <p style="margin-top:14px;">当前工作点来自 <strong>0.95</strong>。该阈值也是 sweep 中的最佳 F1 点。</p>
+          <p style="margin-top:10px;">当前阈值相对验证集阈值，Precision 变化 +0.5862，Recall 变化 -0.1800，F1 变化 +0.3298。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Confusion Matrix</h2><p class="section-subtitle">将 TP / FP / FN / TN 与几个关键派生率放在一起，方便定位当前工作点的代价。</p></div>
+      <div class="confusion-wrap">
+        <div class="subpanel"><section class="confusion-shell"><div class="axis-label axis-top">Predicted Positive</div><div class="axis-label axis-top axis-top-right">Predicted Negative</div><div class="axis-label axis-left">Actual Positive</div><div class="axis-label axis-left axis-left-bottom">Actual Negative</div><div class="matrix-grid"><article class="matrix-cell matrix-tp"><div class="matrix-name">TP</div><div class="matrix-value">31</div><div class="matrix-sub">Recall 62.0%</div></article><article class="matrix-cell matrix-fn"><div class="matrix-name">FN</div><div class="matrix-value">19</div><div class="matrix-sub">FNR 38.0%</div></article><article class="matrix-cell matrix-fp"><div class="matrix-name">FP</div><div class="matrix-value">6</div><div class="matrix-sub">FPR 0.12%</div></article><article class="matrix-cell matrix-tn"><div class="matrix-name">TN</div><div class="matrix-value">4994</div><div class="matrix-sub">Specificity 99.9%</div></article></div></section></div>
+        <div class="subpanel"><h3>Derived Rates</h3><div class="stats-grid"><div class="stat-chip"><div class="label">Specificity <span class="tip" data-tip="Specificity = TN / (TN + FP)，负样本中被正确判为负的比例。衡量模型排除非碰撞事件的能力。">?</span></div><div class="value">99.9%</div></div><div class="stat-chip"><div class="label">FPR <span class="tip" data-tip="False Positive Rate = FP / (FP + TN) = 1 − Specificity。负样本被误判为正的比例，关注误报频率时使用。">?</span></div><div class="value">0.12%</div></div><div class="stat-chip"><div class="label">FNR <span class="tip" data-tip="False Negative Rate = FN / (FN + TP) = 1 − Recall。正样本被漏检的比例，关注漏检风险时使用。">?</span></div><div class="value">38.0%</div></div><div class="stat-chip"><div class="label">NPV <span class="tip" data-tip="Negative Predictive Value = TN / (TN + FN)，预测为负的样本中实际为负的比例。衡量'未报警'的可信度。">?</span></div><div class="value">99.6%</div></div><div class="stat-chip"><div class="label">Balanced Accuracy <span class="tip" data-tip="Balanced Accuracy = (Recall + Specificity) / 2，对正负类准确率取平均，适合不均衡数据集的整体评估。">?</span></div><div class="value">80.9%</div></div><div class="stat-chip"><div class="label">Positive Prevalence <span class="tip" data-tip="正样本在总样本中的占比 = n_positive / n_total。反映数据集的类别分布。">?</span></div><div class="value">0.99%</div></div></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>L2 Breakdown</h2><p class="section-subtitle">分开看类别规模、正类召回和负类误报率，更容易找到误检和漏检集中区。</p></div>
+      <div class="chart-stack">
+        <div class="chart-card"><svg viewBox="0 0 960 334" role="img" aria-label="L2 Category Volume"><text x="0" y="16" fill="#162033" font-size="16" font-weight="700">L2 Category Volume</text><text x="268" y="38" text-anchor="end" fill="#162033" font-size="13">Turning Segment</text><rect x="280" y="18" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="18" width="560.00" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="38" fill="#5d6a82" font-size="13">N=1871</text><text x="268" y="74" text-anchor="end" fill="#162033" font-size="13">No Anomaly</text><rect x="280" y="54" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="54" width="519.59" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="74" fill="#5d6a82" font-size="13">N=1736</text><text x="268" y="110" text-anchor="end" fill="#162033" font-size="13">Rough Road Segment</text><rect x="280" y="90" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="90" width="225.38" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="110" fill="#5d6a82" font-size="13">N=753</text><text x="268" y="146" text-anchor="end" fill="#162033" font-size="13">Dirty Data</text><rect x="280" y="126" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="126" width="128.70" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="146" fill="#5d6a82" font-size="13">N=430</text><text x="268" y="182" text-anchor="end" fill="#162033" font-size="13">Near Miss</text><rect x="280" y="162" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="162" width="37.71" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="182" fill="#5d6a82" font-size="13">N=126</text><text x="268" y="218" text-anchor="end" fill="#162033" font-size="13">Severe Lighting Variation</text><rect x="280" y="198" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="198" width="25.14" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="218" fill="#5d6a82" font-size="13">N=84</text><text x="268" y="254" text-anchor="end" fill="#162033" font-size="13">Collision - Accident</text><rect x="280" y="234" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="234" width="11.97" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="254" fill="#5d6a82" font-size="13">N=40</text><text x="268" y="290" text-anchor="end" fill="#162033" font-size="13">Collision - Non-Accident</text><rect x="280" y="270" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="270" width="2.99" height="24" rx="8" fill="#0f5bd8"/><text x="852" y="290" fill="#5d6a82" font-size="13">N=10</text></svg></div>
+        <div class="chart-card"><svg viewBox="0 0 960 118" role="img" aria-label="Positive Category Recall"><text x="0" y="16" fill="#162033" font-size="16" font-weight="700">Positive Category Recall</text><text x="268" y="38" text-anchor="end" fill="#162033" font-size="13">Collision - Accident</text><rect x="280" y="18" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="18" width="560.00" height="24" rx="8" fill="#138f63"/><text x="852" y="38" fill="#5d6a82" font-size="13">Recall 77.5% | TP 31 / Pos 40</text><text x="268" y="74" text-anchor="end" fill="#162033" font-size="13">Collision - Non-Accident</text><rect x="280" y="54" width="560" height="24" rx="8" fill="#dfe5f1"/><text x="852" y="74" fill="#5d6a82" font-size="13">Recall 0.0% | TP 0 / Pos 10</text></svg></div>
+        <div class="chart-card"><svg viewBox="0 0 960 262" role="img" aria-label="Negative Category False Positive Rate"><text x="0" y="16" fill="#162033" font-size="16" font-weight="700">Negative Category False Positive Rate</text><text x="268" y="38" text-anchor="end" fill="#162033" font-size="13">Near Miss</text><rect x="280" y="18" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="18" width="560.00" height="24" rx="8" fill="#c23934"/><text x="852" y="38" fill="#5d6a82" font-size="13">FPR 3.17% | FP 4 / Neg 126</text><text x="268" y="74" text-anchor="end" fill="#162033" font-size="13">Turning Segment</text><rect x="280" y="54" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="54" width="9.43" height="24" rx="8" fill="#c23934"/><text x="852" y="74" fill="#5d6a82" font-size="13">FPR 0.05% | FP 1 / Neg 1871</text><text x="268" y="110" text-anchor="end" fill="#162033" font-size="13">Dirty Data</text><rect x="280" y="90" width="560" height="24" rx="8" fill="#dfe5f1"/><rect x="280" y="90" width="41.02" height="24" rx="8" fill="#c23934"/><text x="852" y="110" fill="#5d6a82" font-size="13">FPR 0.23% | FP 1 / Neg 430</text><text x="268" y="146" text-anchor="end" fill="#162033" font-size="13">No Anomaly</text><rect x="280" y="126" width="560" height="24" rx="8" fill="#dfe5f1"/><text x="852" y="146" fill="#5d6a82" font-size="13">FPR 0.00% | FP 0 / Neg 1736</text><text x="268" y="182" text-anchor="end" fill="#162033" font-size="13">Rough Road Segment</text><rect x="280" y="162" width="560" height="24" rx="8" fill="#dfe5f1"/><text x="852" y="182" fill="#5d6a82" font-size="13">FPR 0.00% | FP 0 / Neg 753</text><text x="268" y="218" text-anchor="end" fill="#162033" font-size="13">Severe Lighting Variation</text><rect x="280" y="198" width="560" height="24" rx="8" fill="#dfe5f1"/><text x="852" y="218" fill="#5d6a82" font-size="13">FPR 0.00% | FP 0 / Neg 84</text></svg></div>
+      </div>
+      <div style="margin-top:18px;"><table class="data-table"><thead><tr><th>L2 Category</th><th>N</th><th>Pos</th><th>Neg</th><th>TP</th><th>FP</th><th>FN</th><th>Recall <span class="tip" data-tip="TP / Pos，该类别正样本被正确召回的比例。仅正类类别有值。">?</span></th><th>FPR <span class="tip" data-tip="FP / Neg，该类别负样本被误判为正的比例。仅负类类别有值。">?</span></th><th>Hit Rate <span class="tip tip-left" data-tip="(TP + FP) / N，该类别中被模型命中（预测为正）的总比例。">?</span></th></tr></thead><tbody><tr><td>Turning Segment</td><td>1871</td><td>0</td><td>1871</td><td>0</td><td>1</td><td>0</td><td>—</td><td>0.05%</td><td>0.05%</td></tr><tr><td>No Anomaly</td><td>1736</td><td>0</td><td>1736</td><td>0</td><td>0</td><td>0</td><td>—</td><td>0.00%</td><td>0.00%</td></tr><tr><td>Rough Road Segment</td><td>753</td><td>0</td><td>753</td><td>0</td><td>0</td><td>0</td><td>—</td><td>0.00%</td><td>0.00%</td></tr><tr><td>Dirty Data</td><td>430</td><td>0</td><td>430</td><td>0</td><td>1</td><td>0</td><td>—</td><td>0.23%</td><td>0.23%</td></tr><tr><td>Near Miss</td><td>126</td><td>0</td><td>126</td><td>0</td><td>4</td><td>0</td><td>—</td><td>3.17%</td><td>3.17%</td></tr><tr><td>Severe Lighting Variation</td><td>84</td><td>0</td><td>84</td><td>0</td><td>0</td><td>0</td><td>—</td><td>0.00%</td><td>0.00%</td></tr><tr><td>Collision - Accident</td><td>40</td><td>40</td><td>0</td><td>31</td><td>0</td><td>9</td><td>77.5%</td><td>—</td><td>77.50%</td></tr><tr><td>Collision - Non-Accident</td><td>10</td><td>10</td><td>0</td><td>0</td><td>0</td><td>10</td><td>0.0%</td><td>—</td><td>0.00%</td></tr></tbody></table></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Diagnostics</h2><p class="section-subtitle">保留原始 drops 指标，并给出几个适合快速扫读的自动摘要。</p></div>
+      <div class="two-col">
+        <div class="subpanel"><h3>Drop Metrics</h3><div class="metrics-grid"><section class="metric-card card-default"><div class="card-label">drops_shift <span class="tip" data-tip="验证集阈值直接应用到评估集时，模型输出分布的偏移量。负值表示评估集的正类概率整体偏低。">?</span></div><div class="card-value">-3.4112</div></section><section class="metric-card card-success"><div class="card-label">drops_precision <span class="tip" data-tip="使用验证集阈值 (0.45) 在评估集上的 Precision。与 eval_precision 对比可看阈值迁移的影响。">?</span></div><div class="card-value">1.0000</div></section><section class="metric-card card-danger"><div class="card-label">drops_recall <span class="tip" data-tip="使用验证集阈值 (0.45) 在评估集上的 Recall。与 eval_recall 对比可看阈值迁移的影响。">?</span></div><div class="card-value">0.0400</div></section><section class="metric-card card-warning"><div class="card-label">drops_f1 <span class="tip" data-tip="使用验证集阈值 (0.45) 在评估集上的 F1。反映直接迁移阈值的实际效果。">?</span></div><div class="card-value">0.0769</div></section><section class="metric-card card-purple"><div class="card-label">drops_f1_sweep <span class="tip" data-tip="在评估集上做阈值扫描后的最佳 F1。与 drops_f1 对比可衡量阈值重新调优的收益。">?</span></div><div class="card-value">0.7126</div></section></div></div>
+        <div class="subpanel"><h3>Automatic Insights</h3><ul class="insight-list"><li>正样本占比只有 0.99% (50 / 5050)，评估集高度不均衡。</li><li>阈值扫描的最佳 F1 出现在 0.95，对应 F1=0.7126、Precision=0.8378、Recall=0.6200。</li><li>当前阈值 0.95 相比验证集阈值 0.45，Precision 变化 +0.5862，Recall 变化 -0.1800，F1 变化 +0.3298。</li><li>漏检主要集中在 Collision - Accident，FN=9 / Pos=40，Recall=77.5%。</li><li>误报最集中的是 Near Miss，FP=4 / Neg=126，FPR=3.17%。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Raw JSON</h2><p class="section-subtitle">需要核对原始字段时，可以直接在这里展开查看。</p></div>
+      <details>
+        <summary style="cursor:pointer;font-weight:700;">展开原始 JSON</summary>
+        <pre class="raw-json">{
+  &quot;status&quot;: &quot;COMPLETED&quot;,
+  &quot;eval_version&quot;: &quot;v2&quot;,
+  &quot;eval_auc&quot;: 0.963128,
+  &quot;eval_f1&quot;: 0.712644,
+  &quot;eval_precision&quot;: 0.837838,
+  &quot;eval_recall&quot;: 0.62,
+  &quot;threshold&quot;: 0.95,
+  &quot;threshold_from_val&quot;: 0.45,
+  &quot;drops_shift&quot;: -3.411248,
+  &quot;drops_f1&quot;: 0.076923,
+  &quot;drops_precision&quot;: 1.0,
+  &quot;drops_recall&quot;: 0.04,
+  &quot;drops_f1_sweep&quot;: 0.712644,
+  &quot;n_total&quot;: 5050,
+  &quot;n_positive&quot;: 50,
+  &quot;tp&quot;: 31,
+  &quot;fp&quot;: 6,
+  &quot;fn&quot;: 19,
+  &quot;tn&quot;: 4994,
+  &quot;threshold_sweep&quot;: [
+    {
+      &quot;threshold&quot;: 0.05,
+      &quot;f1&quot;: 0.132,
+      &quot;precision&quot;: 0.071,
+      &quot;recall&quot;: 0.94
+    },
+    {
+      &quot;threshold&quot;: 0.1,
+      &quot;f1&quot;: 0.1833,
+      &quot;precision&quot;: 0.1018,
+      &quot;recall&quot;: 0.92
+    },
+    {
+      &quot;threshold&quot;: 0.15,
+      &quot;f1&quot;: 0.2183,
+      &quot;precision&quot;: 0.125,
+      &quot;recall&quot;: 0.86
+    },
+    {
+      &quot;threshold&quot;: 0.2,
+      &quot;f1&quot;: 0.2449,
+      &quot;precision&quot;: 0.1433,
+      &quot;recall&quot;: 0.84
+    },
+    {
+      &quot;threshold&quot;: 0.25,
+      &quot;f1&quot;: 0.2706,
+      &quot;precision&quot;: 0.1621,
+      &quot;recall&quot;: 0.82
+    },
+    {
+      &quot;threshold&quot;: 0.3,
+      &quot;f1&quot;: 0.2993,
+      &quot;precision&quot;: 0.183,
+      &quot;recall&quot;: 0.82
+    },
+    {
+      &quot;threshold&quot;: 0.35,
+      &quot;f1&quot;: 0.3239,
+      &quot;precision&quot;: 0.203,
+      &quot;recall&quot;: 0.8
+    },
+    {
+      &quot;threshold&quot;: 0.4,
+      &quot;f1&quot;: 0.3604,
+      &quot;precision&quot;: 0.2326,
+      &quot;recall&quot;: 0.8
+    },
+    {
+      &quot;threshold&quot;: 0.45,
+      &quot;f1&quot;: 0.3828,
+      &quot;precision&quot;: 0.2516,
+      &quot;recall&quot;: 0.8
+    },
+    {
+      &quot;threshold&quot;: 0.5,
+      &quot;f1&quot;: 0.4061,
+      &quot;precision&quot;: 0.2721,
+      &quot;recall&quot;: 0.8
+    },
+    {
+      &quot;threshold&quot;: 0.55,
+      &quot;f1&quot;: 0.4194,
+      &quot;precision&quot;: 0.2868,
+      &quot;recall&quot;: 0.78
+    },
+    {
+      &quot;threshold&quot;: 0.6,
+      &quot;f1&quot;: 0.4407,
+      &quot;precision&quot;: 0.3071,
+      &quot;recall&quot;: 0.78
+    },
+    {
+      &quot;threshold&quot;: 0.65,
+      &quot;f1&quot;: 0.4671,
+      &quot;precision&quot;: 0.3333,
+      &quot;recall&quot;: 0.78
+    },
+    {
+      &quot;threshold&quot;: 0.7,
+      &quot;f1&quot;: 0.5065,
+      &quot;precision&quot;: 0.375,
+      &quot;recall&quot;: 0.78
+    },
+    {
+      &quot;threshold&quot;: 0.75,
+      &quot;f1&quot;: 0.5417,
+      &quot;precision&quot;: 0.4149,
+      &quot;recall&quot;: 0.78
+    },
+    {
+      &quot;threshold&quot;: 0.8,
+      &quot;f1&quot;: 0.5802,
+      &quot;precision&quot;: 0.4691,
+      &quot;recall&quot;: 0.76
+    },
+    {
+      &quot;threshold&quot;: 0.85,
+      &quot;f1&quot;: 0.5738,
+      &quot;precision&quot;: 0.4861,
+      &quot;recall&quot;: 0.7
+    },
+    {
+      &quot;threshold&quot;: 0.9,
+      &quot;f1&quot;: 0.6182,
+      &quot;precision&quot;: 0.5667,
+      &quot;recall&quot;: 0.68
+    },
+    {
+      &quot;threshold&quot;: 0.95,
+      &quot;f1&quot;: 0.7126,
+      &quot;precision&quot;: 0.8378,
+      &quot;recall&quot;: 0.62
+    }
+  ],
+  &quot;l2_breakdown&quot;: {
+    &quot;Collision - Accident&quot;: {
+      &quot;n&quot;: 40,
+      &quot;pos&quot;: 40,
+      &quot;fp&quot;: 0,
+      &quot;tp&quot;: 31,
+      &quot;fn&quot;: 9
+    },
+    &quot;Near Miss&quot;: {
+      &quot;n&quot;: 126,
+      &quot;pos&quot;: 0,
+      &quot;fp&quot;: 4,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 0
+    },
+    &quot;No Anomaly&quot;: {
+      &quot;n&quot;: 1736,
+      &quot;pos&quot;: 0,
+      &quot;fp&quot;: 0,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 0
+    },
+    &quot;Turning Segment&quot;: {
+      &quot;n&quot;: 1871,
+      &quot;pos&quot;: 0,
+      &quot;fp&quot;: 1,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 0
+    },
+    &quot;Rough Road Segment&quot;: {
+      &quot;n&quot;: 753,
+      &quot;pos&quot;: 0,
+      &quot;fp&quot;: 0,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 0
+    },
+    &quot;Severe Lighting Variation&quot;: {
+      &quot;n&quot;: 84,
+      &quot;pos&quot;: 0,
+      &quot;fp&quot;: 0,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 0
+    },
+    &quot;Dirty Data&quot;: {
+      &quot;n&quot;: 430,
+      &quot;pos&quot;: 0,
+      &quot;fp&quot;: 1,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 0
+    },
+    &quot;Collision - Non-Accident&quot;: {
+      &quot;n&quot;: 10,
+      &quot;pos&quot;: 10,
+      &quot;fp&quot;: 0,
+      &quot;tp&quot;: 0,
+      &quot;fn&quot;: 10
+    }
+  }
+}</pre>
+      </details>
+      <p class="footer-note">Source JSON: <code>/Users/kenjia/workspace/dataset/collision_data/pi_review_data/20260325-20260418/waylens-eval-collision-v2/idea-e4a9fe/eval_report.json</code><br>Generated HTML: <code>/Users/kenjia/workspace/dataset/collision_data/pi_review_data/20260325-20260418/waylens-eval-collision-v2/idea-e4a9fe/eval_report.html</code></p>
+    </section>
+  </main>
+</body>
+</html>

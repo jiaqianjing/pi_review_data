@@ -1,0 +1,195 @@
+{
+  "status": "COMPLETED",
+  "eval_version": "v2",
+  "eval_auc": 0.963128,
+  "eval_f1": 0.712644,
+  "eval_precision": 0.837838,
+  "eval_recall": 0.62,
+  "threshold": 0.95,
+  "threshold_from_val": 0.45,
+  "drops_shift": -3.411248,
+  "drops_f1": 0.076923,
+  "drops_precision": 1.0,
+  "drops_recall": 0.04,
+  "drops_f1_sweep": 0.712644,
+  "n_total": 5050,
+  "n_positive": 50,
+  "tp": 31,
+  "fp": 6,
+  "fn": 19,
+  "tn": 4994,
+  "threshold_sweep": [
+    {
+      "threshold": 0.05,
+      "f1": 0.132,
+      "precision": 0.071,
+      "recall": 0.94
+    },
+    {
+      "threshold": 0.1,
+      "f1": 0.1833,
+      "precision": 0.1018,
+      "recall": 0.92
+    },
+    {
+      "threshold": 0.15,
+      "f1": 0.2183,
+      "precision": 0.125,
+      "recall": 0.86
+    },
+    {
+      "threshold": 0.2,
+      "f1": 0.2449,
+      "precision": 0.1433,
+      "recall": 0.84
+    },
+    {
+      "threshold": 0.25,
+      "f1": 0.2706,
+      "precision": 0.1621,
+      "recall": 0.82
+    },
+    {
+      "threshold": 0.3,
+      "f1": 0.2993,
+      "precision": 0.183,
+      "recall": 0.82
+    },
+    {
+      "threshold": 0.35,
+      "f1": 0.3239,
+      "precision": 0.203,
+      "recall": 0.8
+    },
+    {
+      "threshold": 0.4,
+      "f1": 0.3604,
+      "precision": 0.2326,
+      "recall": 0.8
+    },
+    {
+      "threshold": 0.45,
+      "f1": 0.3828,
+      "precision": 0.2516,
+      "recall": 0.8
+    },
+    {
+      "threshold": 0.5,
+      "f1": 0.4061,
+      "precision": 0.2721,
+      "recall": 0.8
+    },
+    {
+      "threshold": 0.55,
+      "f1": 0.4194,
+      "precision": 0.2868,
+      "recall": 0.78
+    },
+    {
+      "threshold": 0.6,
+      "f1": 0.4407,
+      "precision": 0.3071,
+      "recall": 0.78
+    },
+    {
+      "threshold": 0.65,
+      "f1": 0.4671,
+      "precision": 0.3333,
+      "recall": 0.78
+    },
+    {
+      "threshold": 0.7,
+      "f1": 0.5065,
+      "precision": 0.375,
+      "recall": 0.78
+    },
+    {
+      "threshold": 0.75,
+      "f1": 0.5417,
+      "precision": 0.4149,
+      "recall": 0.78
+    },
+    {
+      "threshold": 0.8,
+      "f1": 0.5802,
+      "precision": 0.4691,
+      "recall": 0.76
+    },
+    {
+      "threshold": 0.85,
+      "f1": 0.5738,
+      "precision": 0.4861,
+      "recall": 0.7
+    },
+    {
+      "threshold": 0.9,
+      "f1": 0.6182,
+      "precision": 0.5667,
+      "recall": 0.68
+    },
+    {
+      "threshold": 0.95,
+      "f1": 0.7126,
+      "precision": 0.8378,
+      "recall": 0.62
+    }
+  ],
+  "l2_breakdown": {
+    "Collision - Accident": {
+      "n": 40,
+      "pos": 40,
+      "fp": 0,
+      "tp": 31,
+      "fn": 9
+    },
+    "Near Miss": {
+      "n": 126,
+      "pos": 0,
+      "fp": 4,
+      "tp": 0,
+      "fn": 0
+    },
+    "No Anomaly": {
+      "n": 1736,
+      "pos": 0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0
+    },
+    "Turning Segment": {
+      "n": 1871,
+      "pos": 0,
+      "fp": 1,
+      "tp": 0,
+      "fn": 0
+    },
+    "Rough Road Segment": {
+      "n": 753,
+      "pos": 0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0
+    },
+    "Severe Lighting Variation": {
+      "n": 84,
+      "pos": 0,
+      "fp": 0,
+      "tp": 0,
+      "fn": 0
+    },
+    "Dirty Data": {
+      "n": 430,
+      "pos": 0,
+      "fp": 1,
+      "tp": 0,
+      "fn": 0
+    },
+    "Collision - Non-Accident": {
+      "n": 10,
+      "pos": 10,
+      "fp": 0,
+      "tp": 0,
+      "fn": 10
+    }
+  }
+}
