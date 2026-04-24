@@ -19,7 +19,7 @@ Evaluation split for collision detection benchmarking.
 - FPS: `15`
 - Duration: `~10s`
 - Trigger: event-centered clip, usually ~5s before and after the trigger
-- Local filename: `{env}-{clipid}-{sn}.mp4`
+- Local filename: `{env}-{sn}-{clipid}.mp4`
 
 ## Metadata Schema
 

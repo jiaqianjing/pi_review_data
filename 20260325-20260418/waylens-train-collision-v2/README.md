@@ -16,7 +16,7 @@ Residual training split after removing the eval set from reviewed clips.
 - FPS: `15`
 - Duration: `~10s`
 - Trigger: event-centered clip, usually ~5s before and after the trigger
-- Local filename: `{env}-{clipid}-{sn}.mp4`
+- Local filename: `{env}-{sn}-{clipid}.mp4`
 
 ## Positive Distribution
 
